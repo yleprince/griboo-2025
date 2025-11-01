@@ -51,11 +51,13 @@ function updateNavigation(day) {
     const nextBtn = document.getElementById('nextBtn');
     const todayBtn = document.getElementById('todayBtn');
     
+    const todayDay = getDayNumber();
+    
     prevBtn.disabled = (day === 1);
-    nextBtn.disabled = (day === 30);
+    // Disable Next button if viewing today's drawing or if day is 30
+    nextBtn.disabled = (day === todayDay || day === 30);
     
     // Check if current day matches today
-    const todayDay = getDayNumber();
     todayBtn.style.opacity = (day === todayDay) ? '0.5' : '1';
     todayBtn.disabled = (day === todayDay);
 }
@@ -82,7 +84,8 @@ document.getElementById('prevBtn').addEventListener('click', () => {
 });
 
 document.getElementById('nextBtn').addEventListener('click', () => {
-    if (currentDay < 30) {
+    const todayDay = getDayNumber();
+    if (currentDay < 30 && currentDay < todayDay) {
         currentDay++;
         loadDrawing(currentDay);
     }
