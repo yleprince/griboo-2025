@@ -4,16 +4,24 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
     min-height: 100vh;
     padding: 20px;
     color: #E5E5E5;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .container {
     max-width: 900px;
+    width: 100%;
     margin: 0 auto;
     background: rgba(44, 49, 58, 0.4);
     backdrop-filter: blur(20px) saturate(180%);
@@ -21,6 +29,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     padding: 40px;
+    box-sizing: border-box;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
@@ -90,6 +99,7 @@ header h1 {
 .drawing-image {
     width: 100%;
     height: 100%;
+    max-width: 100%;
     object-fit: cover;
     display: none;
 }
@@ -193,6 +203,8 @@ header h1 {
 
 /* Gallery Grid */
 .gallery-main {
+    width: 100%;
+    max-width: 100%;
     margin-top: 20px;
 }
 
@@ -234,6 +246,7 @@ header h1 {
 .gallery-item img {
     width: 100%;
     height: calc(100% - 40px);
+    max-width: 100%;
     object-fit: cover;
 }
 
@@ -257,6 +270,10 @@ header h1 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
     .container {
         padding: 20px;
         border-radius: 24px;
@@ -286,6 +303,15 @@ header h1 {
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px;
+        border-radius: 20px;
+    }
+    
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
