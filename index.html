@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griboovember 2025</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Griboovember 2025</h1>
+        </header>
+
+        <main>
+            <div class="day-info">
+                <span class="day-label">Day</span>
+                <span class="day-number" id="currentDay">1</span>
+                <span class="total-days">/ 30</span>
+            </div>
+
+            <div class="drawing-container">
+                <img id="dailyDrawing" src="" alt="Today's drawing" class="drawing-image">
+                <div class="loading" id="loading">Loading...</div>
+            </div>
+
+            <div class="navigation">
+                <button id="prevBtn" class="nav-btn" disabled>← Previous</button>
+                <button id="todayBtn" class="nav-btn">Today</button>
+                <button id="nextBtn" class="nav-btn">Next →</button>
+            </div>
+
+            <div class="gallery-link">
+                <a href="gallery.html" class="gallery-btn">View All Drawings</a>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
