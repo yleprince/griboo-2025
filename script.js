@@ -22,6 +22,7 @@ function loadDrawing(day) {
     const img = document.getElementById('dailyDrawing');
     const loading = document.getElementById('loading');
     const dayNumber = document.getElementById('currentDay');
+    const currentDay = getDayNumber();
     
     // Ensure day is between 1 and 30
     day = Math.max(1, Math.min(30, day));
@@ -32,40 +33,59 @@ function loadDrawing(day) {
     loading.style.display = 'block';
     img.style.display = 'none';
     
-    const imagePath = getImagePath(day);
-    
     // Remove previous error handlers
     img.onerror = null;
     img.onload = null;
     
-    // Set up error handler to fallback to placeholder
-    img.onerror = function() {
-        // Try placeholder image
+    // Check if day is in the future - use placeholder to prevent spoilers
+    if (day > currentDay) {
+        // Future day - use placeholder directly
         const placeholderPath = getPlaceholderPath();
-        this.src = placeholderPath;
+        img.src = placeholderPath;
         
-        // Set up new error handler (if placeholder also fails, show loading)
-        this.onerror = function() {
+        img.onload = function() {
+            loading.style.display = 'none';
+            this.style.display = 'block';
+        };
+        
+        img.onerror = function() {
             loading.textContent = 'Image not found';
             loading.style.display = 'block';
             this.style.display = 'none';
         };
+    } else {
+        // Past or current day - try to load actual image with placeholder fallback
+        const imagePath = getImagePath(day);
         
-        // If placeholder loads successfully
-        this.onload = function() {
+        // Set up error handler to fallback to placeholder
+        img.onerror = function() {
+            // Try placeholder image
+            const placeholderPath = getPlaceholderPath();
+            this.src = placeholderPath;
+            
+            // Set up new error handler (if placeholder also fails, show loading)
+            this.onerror = function() {
+                loading.textContent = 'Image not found';
+                loading.style.display = 'block';
+                this.style.display = 'none';
+            };
+            
+            // If placeholder loads successfully
+            this.onload = function() {
+                loading.style.display = 'none';
+                this.style.display = 'block';
+            };
+        };
+        
+        // Set up success handler
+        img.onload = function() {
             loading.style.display = 'none';
             this.style.display = 'block';
         };
-    };
-    
-    // Set up success handler
-    img.onload = function() {
-        loading.style.display = 'none';
-        this.style.display = 'block';
-    };
-    
-    // Load the image
-    img.src = imagePath;
+        
+        // Load the image
+        img.src = imagePath;
+    }
     
     // Update navigation buttons
     updateNavigation(day);
