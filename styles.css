@@ -40,9 +40,11 @@ body.index-page .container {
     display: flex;
     flex-direction: column;
     padding-bottom: 40px;
+    padding-right: 16px;
+    padding-left: 16px;
     min-height: 0;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 
 body.index-page header {
@@ -54,10 +56,11 @@ body.index-page main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: stretch;
+    align-items: center;
     min-height: 0;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: visible;
+    padding: 0 8px;
 }
 
 body.index-page .drawing-container {
@@ -65,6 +68,9 @@ body.index-page .drawing-container {
     aspect-ratio: 1;
     width: 100%;
     max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
 }
 
 .container {
@@ -558,7 +564,10 @@ header h1 {
         height: calc(100vh - 30px);
         max-height: calc(100vh - 30px);
         padding: 15px;
+        padding-right: 20px;
+        padding-left: 15px;
         padding-bottom: 20px;
+        overflow-x: visible;
     }
     
     body.index-page header {
@@ -700,7 +709,14 @@ header h1 {
         height: calc(100vh - 20px);
         max-height: calc(100vh - 20px);
         padding: 10px;
+        padding-right: 18px;
+        padding-left: 10px;
         padding-bottom: 15px;
+        overflow-x: visible;
+    }
+    
+    body.index-page main {
+        padding: 0 4px;
     }
     
     body.index-page header {
