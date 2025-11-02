@@ -24,15 +24,22 @@ function createGalleryItem(day) {
     link.href = `index.html?day=${day}`;
     
     const img = document.createElement('img');
-    img.src = getImagePath(day);
+    const currentDay = getDayNumber();
+    
+    // Use placeholder for future days to prevent spoilers
+    if (day > currentDay) {
+        img.src = getPlaceholderPath();
+    } else {
+        img.src = getImagePath(day);
+        // Use placeholder if actual image fails to load
+        img.onerror = function() {
+            this.src = getPlaceholderPath();
+            this.onerror = null; // Prevent infinite loop if placeholder also fails
+        };
+    }
+    
     img.alt = `Drawing Day ${day}`;
     img.loading = 'lazy';
-    
-    // Use placeholder if image fails to load
-    img.onerror = function() {
-        this.src = getPlaceholderPath();
-        this.onerror = null; // Prevent infinite loop if placeholder also fails
-    };
     
     const label = document.createElement('div');
     label.className = 'gallery-label';

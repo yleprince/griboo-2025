@@ -92,6 +92,18 @@ body.gallery-page .container {
     padding-bottom: 40px;
 }
 
+/* About page: standard container */
+body.about-page {
+    padding: 20px 20px 40px 20px;
+}
+
+body.about-page .container {
+    max-width: 640px;
+    width: 90%;
+    padding: 40px;
+    padding-bottom: 50px;
+}
+
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -358,11 +370,6 @@ header h1 {
     flex-direction: column;
 }
 .gallery-item img {
-    /* border: 4px solid #003049; */
-}
-
-.gallery-item img {
-
     border: 4px solid #003049;
 }
 
@@ -412,10 +419,132 @@ header h1 {
     display: none;
 }
 
+/* About page content */
+.about-main {
+    width: 100%;
+}
+
+.about-content {
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.8;
+    color: #003049;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: left;
+}
+
+.about-content p:last-child {
+    margin-bottom: 0;
+}
+
+.about-content h2,
+.about-content h3 {
+    color: #003049;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.about-content h2 {
+    font-size: 1.5rem;
+    border: 3px solid #003049;
+    padding: 10px 15px;
+    background: #eae2b7;
+    display: inline-block;
+}
+
+.about-content h3 {
+    font-size: 1.2rem;
+}
+
+.about-content a {
+    color: #d62828;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.about-content a:hover {
+    color: #003049;
+    background: #fcbf49;
+    text-decoration: none;
+}
+
+/* About menu button - floating bottom right */
+.about-menu-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 12px 20px;
+    background: #003049;
+    color: #fcbf49;
+    text-decoration: none;
+    border-radius: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    transition: all 0.1s ease;
+    border: 4px solid #003049;
+    font-family: 'Courier New', 'Monaco', monospace;
+    font-size: 0.75rem;
+    box-shadow: 5px 5px 0px #d62828;
+}
+
+.about-menu-btn:hover {
+    background: #fcbf49;
+    color: #003049;
+    transform: translate(4px, 4px);
+    box-shadow: 1px 1px 0px #d62828;
+}
+
+.about-menu-btn:active {
+    transform: translate(5px, 5px);
+    box-shadow: 0px 0px 0px #d62828;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
         padding: 15px 15px 30px 15px;
+    }
+    
+    body.about-page {
+        padding: 15px;
+    }
+    
+    body.about-page .container {
+        max-width: 100%;
+        width: 95%;
+        padding: 25px;
+        padding-bottom: 35px;
+    }
+    
+    .about-content p {
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+    }
+    
+    .about-content h2 {
+        font-size: 1.2rem;
+        padding: 8px 12px;
+    }
+    
+    .about-content h3 {
+        font-size: 1rem;
+    }
+    
+    .about-menu-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 18px;
+        font-size: 0.7rem;
+        border-width: 3px;
+        box-shadow: 4px 4px 0px #d62828;
     }
     
     body.index-page {
@@ -521,6 +650,43 @@ header h1 {
 @media (max-width: 480px) {
     body {
         padding: 10px 10px 25px 10px;
+    }
+    
+    body.about-page {
+        padding: 10px;
+    }
+    
+    body.about-page .container {
+        max-width: 100%;
+        width: 95%;
+        padding: 20px;
+        padding-bottom: 30px;
+    }
+    
+    .about-content p {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+    
+    .about-content h2 {
+        font-size: 1rem;
+        padding: 6px 10px;
+        margin-top: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .about-content h3 {
+        font-size: 0.9rem;
+    }
+    
+    .about-menu-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 18px;
+        font-size: 0.7rem;
+        border-width: 3px;
+        box-shadow: 4px 4px 0px #d62828;
     }
     
     body.index-page {
