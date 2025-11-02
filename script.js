@@ -14,6 +14,10 @@ function getImagePath(day) {
     return `images/day${dayPadded}.jpeg`;
 }
 
+function getPlaceholderPath() {
+    return 'images/day00.jpeg';
+}
+
 function loadDrawing(day) {
     const img = document.getElementById('dailyDrawing');
     const loading = document.getElementById('loading');
@@ -29,18 +33,39 @@ function loadDrawing(day) {
     img.style.display = 'none';
     
     const imagePath = getImagePath(day);
-    img.src = imagePath;
     
+    // Remove previous error handlers
+    img.onerror = null;
+    img.onload = null;
+    
+    // Set up error handler to fallback to placeholder
+    img.onerror = function() {
+        // Try placeholder image
+        const placeholderPath = getPlaceholderPath();
+        this.src = placeholderPath;
+        
+        // Set up new error handler (if placeholder also fails, show loading)
+        this.onerror = function() {
+            loading.textContent = 'Image not found';
+            loading.style.display = 'block';
+            this.style.display = 'none';
+        };
+        
+        // If placeholder loads successfully
+        this.onload = function() {
+            loading.style.display = 'none';
+            this.style.display = 'block';
+        };
+    };
+    
+    // Set up success handler
     img.onload = function() {
         loading.style.display = 'none';
-        img.style.display = 'block';
+        this.style.display = 'block';
     };
     
-    img.onerror = function() {
-        loading.textContent = 'Image not found';
-        loading.style.display = 'block';
-        img.style.display = 'none';
-    };
+    // Load the image
+    img.src = imagePath;
     
     // Update navigation buttons
     updateNavigation(day);

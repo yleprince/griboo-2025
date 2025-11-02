@@ -12,27 +12,27 @@ function getImagePath(day) {
     return `images/day${dayPadded}.jpeg`;
 }
 
-function createGalleryItem(day, isAvailable) {
+function getPlaceholderPath() {
+    return 'images/day00.jpeg';
+}
+
+function createGalleryItem(day) {
     const item = document.createElement('div');
     item.className = 'gallery-item';
     
-    // Add hidden class for unavailable days
-    if (!isAvailable) {
-        item.classList.add('gallery-item-hidden');
-    }
-    
     const link = document.createElement('a');
-    if (isAvailable) {
-        link.href = `index.html?day=${day}`;
-    } else {
-        link.href = '#';
-        link.addEventListener('click', (e) => e.preventDefault());
-    }
+    link.href = `index.html?day=${day}`;
     
     const img = document.createElement('img');
     img.src = getImagePath(day);
     img.alt = `Drawing Day ${day}`;
     img.loading = 'lazy';
+    
+    // Use placeholder if image fails to load
+    img.onerror = function() {
+        this.src = getPlaceholderPath();
+        this.onerror = null; // Prevent infinite loop if placeholder also fails
+    };
     
     const label = document.createElement('div');
     label.className = 'gallery-label';
@@ -47,13 +47,11 @@ function createGalleryItem(day, isAvailable) {
 
 function loadGallery() {
     const galleryGrid = document.getElementById('galleryGrid');
-    const currentDay = getDayNumber();
     
     // Create gallery items for all 30 days
-    // Hide items for days that haven't occurred yet
+    // All days are visible, placeholder will be used if image doesn't exist
     for (let day = 1; day <= 30; day++) {
-        const isAvailable = day <= currentDay;
-        const item = createGalleryItem(day, isAvailable);
+        const item = createGalleryItem(day);
         galleryGrid.appendChild(item);
     }
 }
