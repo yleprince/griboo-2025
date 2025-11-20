@@ -89,6 +89,9 @@ function loadDrawing(day) {
     
     // Update navigation buttons
     updateNavigation(day);
+    
+    // Update URL parameter
+    updateURL(day);
 }
 
 function updateNavigation(day) {
@@ -107,6 +110,21 @@ function updateNavigation(day) {
     todayBtn.disabled = (day === todayDay);
 }
 
+function updateURL(day) {
+    const todayDay = getDayNumber();
+    
+    // Only update URL if not viewing today's day (to keep URLs clean)
+    if (day === todayDay) {
+        // Remove day parameter if viewing today
+        const newURL = window.location.pathname;
+        window.history.pushState({ day: day }, '', newURL);
+    } else {
+        // Update URL with day parameter
+        const newURL = `${window.location.pathname}?day=${day}`;
+        window.history.pushState({ day: day }, '', newURL);
+    }
+}
+
 // Check for day parameter in URL (from gallery click)
 const urlParams = new URLSearchParams(window.location.search);
 const dayParam = urlParams.get('day');
@@ -116,6 +134,21 @@ let currentDay = dayParam ? parseInt(dayParam) : getDayNumber();
 
 // Ensure day is valid (1-30)
 currentDay = Math.max(1, Math.min(30, currentDay));
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (e) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const dayParam = urlParams.get('day');
+    const todayDay = getDayNumber();
+    
+    if (dayParam) {
+        currentDay = Math.max(1, Math.min(30, parseInt(dayParam)));
+    } else {
+        currentDay = todayDay;
+    }
+    
+    loadDrawing(currentDay);
+});
 
 // Load today's drawing on page load
 loadDrawing(currentDay);
