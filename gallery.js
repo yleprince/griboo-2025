@@ -26,6 +26,8 @@ function createGalleryItem(day) {
     const img = document.createElement('img');
     const currentDay = getDayNumber();
     
+    
+    
     // Use placeholder for future days to prevent spoilers
     if (day > currentDay) {
         img.src = getPlaceholderPath();
@@ -41,12 +43,13 @@ function createGalleryItem(day) {
     img.alt = `Drawing Day ${day}`;
     img.loading = 'lazy';
     
-    const label = document.createElement('div');
-    label.className = 'gallery-label';
-    label.textContent = `Day ${day}`;
+    // Day number overlay on image
+    const dayOverlay = document.createElement('div');
+    dayOverlay.className = 'gallery-day-overlay';
+    dayOverlay.textContent = day;
     
     link.appendChild(img);
-    link.appendChild(label);
+    link.appendChild(dayOverlay);
     item.appendChild(link);
     
     return item;
