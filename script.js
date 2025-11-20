@@ -140,3 +140,30 @@ document.getElementById('todayBtn').addEventListener('click', () => {
     currentDay = getDayNumber();
     loadDrawing(currentDay);
 });
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Only handle shortcuts if not typing in an input field
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+        return;
+    }
+    
+    // J or Left Arrow: Previous day
+    if (e.key === 'j' || e.key === 'J' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (currentDay > 1) {
+            currentDay--;
+            loadDrawing(currentDay);
+        }
+    }
+    
+    // K or Right Arrow: Next day
+    if (e.key === 'k' || e.key === 'K' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        const todayDay = getDayNumber();
+        if (currentDay < 30 && currentDay < todayDay) {
+            currentDay++;
+            loadDrawing(currentDay);
+        }
+    }
+});
